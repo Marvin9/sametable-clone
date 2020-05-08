@@ -30,6 +30,13 @@ export const updateProject = async (spaceId, projectId, obj) => {
     .update(obj);
 };
 
+export const getProject = async (spaceId, projectId) => {
+  const docs = await firebase.firestore().collection('spaces').doc(spaceId).collection('projects')
+    .doc(projectId)
+    .get();
+  return docs.data();
+};
+
 export const addProject = async (spaceId) => {
   const add = await firebase.firestore().collection('spaces').doc(spaceId).collection('projects')
     .add({});

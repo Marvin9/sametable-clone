@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { CustomButton, LHeading } from '../../../../shared';
+import { CustomButton, HighLightedHeading } from '../../../../shared';
 
 import { addProject, getProjectsAndSpaceName } from '../helpers';
 import { RenderProject } from './component/RenderProject';
@@ -14,10 +14,7 @@ export const Space = ({ spaceId }) => {
       updateProjects(p);
       updateSpaceName(s);
     });
-
-    // eslint-disable-next-line no-return-assign
-    // return () => (window.location = '/');
-  }, []);
+  }, [spaceId]);
 
   const addNewProject = async () => {
     const id = await addProject(spaceId);
@@ -27,7 +24,7 @@ export const Space = ({ spaceId }) => {
   return (
     <>
       {spaceName && (
-        <LHeading bg="pink" p={2} sx={{ borderRadius: '10px', '&:hover': { background: 'none' } }}>{spaceName}</LHeading>
+        <HighLightedHeading>{spaceName}</HighLightedHeading>
       )}
       <br />
       <CustomButton ml={3} onClick={addNewProject}>

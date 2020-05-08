@@ -39,12 +39,14 @@ export const trackReducer = (state, action) => {
       };
     }
     case 'SELECT_TASK': {
-      const { taskData } = action;
+      const { taskData, projectData, spaceData } = action;
       return {
-        ...state,
+        space: spaceData,
         task: taskData,
+        project: projectData,
       };
     }
+    // TODO => Clear
     default:
       return state;
   }

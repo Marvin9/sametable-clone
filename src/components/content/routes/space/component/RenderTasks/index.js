@@ -30,12 +30,14 @@ export const RenderTasks = ({ spaceId, projectId }) => {
   const TaskTable = tasks.length ? (
     <Table>
       <thead style={{ backgroundColor: '#E1E3E5' }}>
-        <TableHeading>Task</TableHeading>
-        <TableHeading>Task Owner</TableHeading>
-        <TableHeading>Due date</TableHeading>
-        <TableHeading>Status</TableHeading>
-        <TableHeading>Priority</TableHeading>
-        <TableHeading>View</TableHeading>
+        <tr>
+          <TableHeading>Task</TableHeading>
+          <TableHeading>Task Owner</TableHeading>
+          <TableHeading>Due date</TableHeading>
+          <TableHeading>Status</TableHeading>
+          <TableHeading>Priority</TableHeading>
+          <TableHeading>View</TableHeading>
+        </tr>
       </thead>
 
       <tbody>

@@ -1,5 +1,5 @@
 export {
-  LHeading, MHeading, SHeading,
+  HighLightedHeading, LHeading, MHeading, SHeading,
 } from './fonts';
 
 export { Overlay } from './components';

@@ -27,6 +27,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/jsx-props-no-spreading': 'off',
     'camelcase': 'off',
-    'no-param-reassign': 'off'
+    'no-param-reassign': 'off',
+    'import/no-cycle': 'off',
   },
 };

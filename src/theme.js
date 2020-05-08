@@ -7,4 +7,5 @@ export const theme = {
     light: '#FBFBFB',
     pink: 'pink',
   },
+  breakpoints: ['769px', '3000px'],
 };

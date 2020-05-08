@@ -9,7 +9,10 @@ import {
   CustomButton, CustomInput, SHeading,
 } from '../../../../../shared';
 import { updateProject } from '../../helpers';
+// eslint-disable-next-line import/no-cycle
 import { RenderTasks } from './RenderTasks';
+
+export const ProjectContext = React.createContext();
 
 export const RenderProject = ({ project, spaceId, spaceName }) => {
   const [projectPayload, updatePayload] = useState(project);
@@ -44,8 +47,11 @@ export const RenderProject = ({ project, spaceId, spaceName }) => {
         hidden
       />
 
-      <Flex justifyContent="space-between" alignItems="center">
-        <Flex flexDirection="column">
+      <Flex
+        alignItems="center"
+        flexWrap="wrap"
+      >
+        <Flex flexDirection="column" width={[1 / 2]} mr={3}>
           <SHeading m={0}>Approver</SHeading>
           <CustomInput
             type="text"
@@ -60,14 +66,14 @@ export const RenderProject = ({ project, spaceId, spaceName }) => {
           <SHeading m={0}>Due Date</SHeading>
           <CustomInput
             type="text"
-            placeholder="Enter due data"
+            placeholder="Enter due date"
             value={projectPayload.due_date}
             onChange={(e) => updatePayload({ ...projectPayload, due_date: e.target.value })}
             onBlur={updateProjectDb}
           />
         </Flex>
 
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" mx={3}>
           <SHeading m={0}>Status</SHeading>
           <Select
             placeholder="Select status"
@@ -107,8 +113,17 @@ export const RenderProject = ({ project, spaceId, spaceName }) => {
 
       <br />
 
-      <RenderTasks projectId={project.id} spaceId={spaceId} />
-
+      <ProjectContext.Provider
+        value={{
+          project,
+          space: {
+            id: spaceId,
+            spaceName,
+          },
+        }}
+      >
+        <RenderTasks projectId={project.id} spaceId={spaceId} />
+      </ProjectContext.Provider>
       <hr
         style={{
           margin: '2rem 0',

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export const BreadCrumb = ({ data }) => (
   <Flex alignItems="center">
     {data.map((route) => (
-      <>
+      <React.Fragment key={route.route}>
         <Link
           to={route.route}
           style={{
@@ -17,7 +17,7 @@ export const BreadCrumb = ({ data }) => (
           {' '}
         </Link>
         <FaArrowRight fontSize={10} />
-      </>
+      </React.Fragment>
     ))}
   </Flex>
 );

@@ -8,12 +8,16 @@ import {
   Column, CustomButton, CustomInput, Row,
 } from '../../../../../../shared';
 
+// eslint-disable-next-line import/no-cycle
+import { ProjectContext } from '../RenderProject';
+
 export const Task = ({ task, updateTaskDb }) => {
   const [taskPayload, updateTaskPayload] = useState(task);
 
   const initialMount = React.useRef(true);
 
-  const { trackDispatcher } = React.useContext(TrackContext);
+  const { trackDispatcher } = useContext(TrackContext);
+  const { project, space } = useContext(ProjectContext);
 
   useEffect(() => {
     if (initialMount.current) {
@@ -60,7 +64,7 @@ export const Task = ({ task, updateTaskDb }) => {
           })}
         />
       </Column>
-      <Column>
+      <Column width="20%">
         <Select
           placeholder="Select status"
           value={taskPayload.status}
@@ -74,9 +78,9 @@ export const Task = ({ task, updateTaskDb }) => {
           <option value="completed">Completed</option>
         </Select>
       </Column>
-      <Column>
+      <Column width="20%">
         <Select
-          placeholder="Select status"
+          placeholder="Select priority"
           value={taskPayload.priority}
           onChange={(e) => updateTaskPayload({
             ...taskPayload,
@@ -92,9 +96,14 @@ export const Task = ({ task, updateTaskDb }) => {
         <CustomButton>
           <Link
             style={{ color: 'white' }}
-            to={`/tasks/${taskPayload.id}`}
+            to={`/task/${taskPayload.id}`}
             onClick={() => {
-              trackDispatcher({ type: 'SELECT_TASK', taskData: taskPayload });
+              trackDispatcher({
+                type: 'SELECT_TASK',
+                taskData: taskPayload,
+                projectData: project,
+                spaceData: space,
+              });
             }}
           >
             View
