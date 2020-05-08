@@ -60,7 +60,7 @@ export const Task = ({ task, updateTaskDb }) => {
           value={taskPayload.due_date}
           onChange={(e) => updateTaskPayload({
             ...taskPayload,
-            owner: e.target.value,
+            due_date: e.target.value,
           })}
         />
       </Column>
