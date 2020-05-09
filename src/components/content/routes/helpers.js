@@ -43,15 +43,24 @@ export const addProject = async (spaceId) => {
   return (await add).id;
 };
 
+const emptyTask = (task) => (
+  !task.title && !task.owner && !task.due_date
+);
+
 export const getTasks = async (spaceId, projectId) => {
   let tasks = [];
-  const docs = await firebase.firestore().collection('spaces').doc(spaceId)
+  const tasksDocs = await firebase.firestore().collection('spaces').doc(spaceId)
     .collection('projects')
     .doc(projectId)
-    .collection('tasks')
-    .get();
+    .collection('tasks');
 
-  docs.docs.forEach((task) => {
+  const getTasksDocs = await tasksDocs.get();
+
+  getTasksDocs.docs.forEach((task) => {
+    if (emptyTask(task.data())) {
+      tasksDocs.doc(task.id).delete();
+      return;
+    }
     const {
       title, owner, due_date, status, priority,
     } = task.data();

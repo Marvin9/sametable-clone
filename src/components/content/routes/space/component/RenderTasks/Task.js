@@ -33,7 +33,7 @@ export const Task = ({ task, updateTaskDb }) => {
         <CustomInput
           type="text"
           placeholder="Task title"
-          value={taskPayload.title}
+          value={taskPayload.title || ''}
           onChange={(e) => updateTaskPayload({
             ...taskPayload,
             title: e.target.value,
@@ -45,7 +45,7 @@ export const Task = ({ task, updateTaskDb }) => {
         <CustomInput
           type="text"
           placeholder="Task owner"
-          value={taskPayload.owner}
+          value={taskPayload.owner || ''}
           onChange={(e) => updateTaskPayload({
             ...taskPayload,
             owner: e.target.value,
@@ -57,7 +57,7 @@ export const Task = ({ task, updateTaskDb }) => {
         <CustomInput
           type="text"
           placeholder="Due date"
-          value={taskPayload.due_date}
+          value={taskPayload.due_date || ''}
           onChange={(e) => updateTaskPayload({
             ...taskPayload,
             due_date: e.target.value,
@@ -67,7 +67,7 @@ export const Task = ({ task, updateTaskDb }) => {
       <Column width="20%">
         <Select
           placeholder="Select status"
-          value={taskPayload.status}
+          value={taskPayload.status || ''}
           onChange={(e) => updateTaskPayload({
             ...taskPayload,
             status: e.target.value,
@@ -81,7 +81,7 @@ export const Task = ({ task, updateTaskDb }) => {
       <Column width="20%">
         <Select
           placeholder="Select priority"
-          value={taskPayload.priority}
+          value={taskPayload.priority || ''}
           onChange={(e) => updateTaskPayload({
             ...taskPayload,
             priority: e.target.value,
